@@ -3,6 +3,7 @@ const searcharea = document.querySelector(".search-area");
 const searchclose = document.querySelector(".search-close");
 const searchinput = document.querySelector(".input-search");
 const searchform = document.querySelector(".search-form");
+const body = document.querySelector("body");
 
 searchbtn.addEventListener("click", function (e) {
   e.preventDefault();
@@ -38,19 +39,44 @@ function getsurah() {
       data.forEach((quran) => {
         list += template(quran);
       });
-      console.log(list);
       const body = document.querySelector(".body-content");
+
       body.innerHTML = list;
+
+      const datas = data;
+      sort(datas); //panggil function sort
     })
     .catch((err) => {
       console.log(err);
     });
 }
 
+window.addEventListener("click", function (e) {
+  if (e.target.classList.contains("box")) {
+    const id = e.target.dataset.id;
+    console.log(id);
+  }
+});
+
 getsurah();
 
+//membuat menjadi Descanding dan Ascending
+const select = document.querySelector("#option");
+function sort(datas) {
+  select.onchange = function () {
+    let data = datas.reverse();
+    let list = "";
+    data.forEach((quran) => {
+      list += template(quran);
+    });
+    const body = document.querySelector(".body-content");
+
+    body.innerHTML = list;
+  };
+}
+
 function template(quran) {
-  return ` <li class="box">
+  return ` <li class="box" data-id="${quran.nomor}">
             <div class="box-left">
               <div class="border">
                 <div class="number">
