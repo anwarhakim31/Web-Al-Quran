@@ -34,12 +34,40 @@ function getsurah() {
       return response.json();
     })
     .then(({ data }) => {
+      let list = "";
       data.forEach((quran) => {
-        console.log(quran);
+        list += template(quran);
       });
+      console.log(list);
+      const body = document.querySelector(".body-content");
+      body.innerHTML = list;
+    })
+    .catch((err) => {
+      console.log(err);
     });
 }
 
 getsurah();
 
-// function
+function template(quran) {
+  return ` <li class="box">
+            <div class="box-left">
+              <div class="border">
+                <div class="number">
+                  <span> ${quran.nomor} </span>
+                </div>
+                <img src="images/border.png" alt="" />
+              </div>
+              <div class="title">
+                <h4 class="chapt">${quran.namaLatin}</h4>
+                <h6 class="detail">
+                  <span class="translate">${quran.arti}</span>
+                </h6>
+              </div>
+            </div>
+            <div class="box-right">
+              <h4 class="arabic">${quran.nama}</h4>
+              <h6><span class="ayat">${quran.jumlahAyat} Ayat</span></h6>
+            </div>
+          </li>`;
+}
