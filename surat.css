@@ -146,9 +146,16 @@ header {
 }
 
 .halaman .detail i {
-  font-size: 2rem;
+  font-size: 3rem;
+  word-spacing: -2px;
   color: #000;
 }
+
+.halaman .detail .arabicname {
+  font-style: normal;
+  font-weight: 200;
+}
+
 .halaman .detail p {
   font-size: 1.25rem;
   font-weight: 500;
@@ -157,11 +164,30 @@ header {
 }
 
 .halaman .detail,
-.total,
-.part {
+.total {
   padding-left: 10px;
   position: relative;
   color: #555;
+  font-weight: 400;
+}
+.halaman .detail .part {
+  font-weight: 400;
+}
+
+.halaman .detail .total {
+  position: relative;
+}
+
+.halaman .detail .total::before {
+  content: "";
+  width: 3px;
+  height: 3px;
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #000;
+  border-radius: 50%;
 }
 
 .body-surat {
@@ -196,10 +222,53 @@ header {
   color: #000;
 }
 .latin-text {
-  margin-block: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
   color: #176b87;
+  font-size: 1rem;
 }
 
 .arti-text {
   font-weight: 400;
+  font-size: 1rem;
+}
+
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: whitesmoke;
+  z-index: 99;
+  transition: opacity 0.75s, visibilty 0.75s;
+}
+
+.loader-hidden {
+  opacity: 0;
+  visibility: hidden;
+  display: none;
+}
+
+.loader::after {
+  content: "";
+  position: absolute;
+  width: 75px;
+  height: 75px;
+  border-radius: 50px;
+  border: 15px solid white;
+  border-top-color: #176b87;
+  animation: loading 0.75s ease infinite;
+}
+
+@keyframes loading {
+  from {
+    transform: rotate (0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
 }

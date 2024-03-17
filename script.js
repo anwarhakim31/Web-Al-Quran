@@ -102,21 +102,3 @@ function template(quran) {
      
           </li>`;
 }
-
-// quran.nomor = convertToArabic(quran.nomor);
-
-// function convertToArabic(number) {
-//   const arabicNumerals = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
-//   const digits = number.toString().split("");
-//   let arabicNumber = "";
-
-//   for (let i = 0; i < digits.length; i++) {
-//     if (!isNaN(digits[i])) {
-//       arabicNumber += arabicNumerals[parseInt(digits[i])];
-//     } else {
-//       arabicNumber += digits[i];
-//     }
-//   }
-
-//   return arabicNumber;
-// }
