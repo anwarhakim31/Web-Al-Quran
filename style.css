@@ -48,16 +48,14 @@ header {
 }
 
 .extra i {
-  padding: 0.3rem;
+  width: 50px;
+  height: 50px;
   background-color: white;
   border-radius: 50%;
   border: 1px solid white;
   cursor: pointer;
-}
-
-.extra img {
-  height: 35px;
-  display: block;
+  display: grid;
+  place-items: center;
 }
 
 .extra i:nth-child(2) {
@@ -218,6 +216,14 @@ header {
   border: 2px solid #176b87;
 }
 
+.box:hover .box-left .title .detail {
+  color: #176b87;
+}
+
+.box:hover .box-right span {
+  color: #176b87;
+}
+
 .box-left {
   display: flex;
   text-align: center;
@@ -232,10 +238,14 @@ header {
 
 .box .border .number {
   position: relative;
-  padding: 10px;
+  margin: auto;
+  width: 10px;
+  height: 10px;
   display: flex;
   align-items: center;
+  justify-content: center;
   span {
+    padding: 0.5rem;
     font-size: 0.75rem;
     font-weight: 700;
   }
@@ -265,22 +275,6 @@ header {
   color: #555;
   font-weight: 600;
 }
-/* .box .title .detail .ayat::before {
-  content: "";
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background-color: #555;
-  left: 5px;
-  top: 50%;
-  transform: translate(-50%, -50%);
-} */
-
-/* .box .title .detail .ayat {
-  padding-left: 10px;
-  position: relative;
-} */
 
 .box .box-right {
   text-align: center;
@@ -295,7 +289,14 @@ header {
   margin-bottom: 5px;
 }
 
-@media (max-width: 576px) {
+.footer {
+  text-align: center;
+  padding: 3rem 10%;
+  background-color: #176b87;
+  color: white;
+  margin-top: 20px;
+}
+@media (max-width: 500px) {
   .banner {
     h1 {
       font-size: 30px;
@@ -310,4 +311,18 @@ header {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
   }
+}
+
+/* custom scroll bar */
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+::-webkit-scrollbar-track {
+  background: #dfdfdf;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #176b87;
+  border-radius: 20px;
 }

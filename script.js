@@ -36,11 +36,12 @@ function getsurah() {
     })
     .then(({ data }) => {
       let list = "";
+
       data.forEach((quran) => {
         list += template(quran);
       });
-      const body = document.querySelector(".body-content");
 
+      const body = document.querySelector(".body-content");
       body.innerHTML = list;
 
       const datas = data;
@@ -51,12 +52,12 @@ function getsurah() {
     });
 }
 
-window.addEventListener("click", function (e) {
-  if (e.target.classList.contains("box")) {
-    const id = e.target.dataset.id;
-    console.log(id);
-  }
-});
+// window.addEventListener("click", function (e) {
+//   if (e.target.classList.contains("box")) {
+//     const id = e.target.dataset.id;
+//     console.log(id);
+//   }
+// });
 
 getsurah();
 
@@ -65,7 +66,9 @@ const select = document.querySelector("#option");
 function sort(datas) {
   select.onchange = function () {
     let data = datas.reverse();
+
     let list = "";
+
     data.forEach((quran) => {
       list += template(quran);
     });
@@ -76,7 +79,8 @@ function sort(datas) {
 }
 
 function template(quran) {
-  return ` <li class="box" data-id="${quran.nomor}">
+  return ` <li class="box" onclick="location.href='surat.html?surat/:${quran.nomor}'">
+
             <div class="box-left">
               <div class="border">
                 <div class="number">
@@ -95,5 +99,24 @@ function template(quran) {
               <h4 class="arabic">${quran.nama}</h4>
               <h6><span class="ayat">${quran.jumlahAyat} Ayat</span></h6>
             </div>
+     
           </li>`;
 }
+
+// quran.nomor = convertToArabic(quran.nomor);
+
+// function convertToArabic(number) {
+//   const arabicNumerals = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+//   const digits = number.toString().split("");
+//   let arabicNumber = "";
+
+//   for (let i = 0; i < digits.length; i++) {
+//     if (!isNaN(digits[i])) {
+//       arabicNumber += arabicNumerals[parseInt(digits[i])];
+//     } else {
+//       arabicNumber += digits[i];
+//     }
+//   }
+
+//   return arabicNumber;
+// }
