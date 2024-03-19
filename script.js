@@ -79,7 +79,7 @@ function sort(datas) {
 }
 
 function template(quran) {
-  return ` <li class="box" onclick="location.href='surat?surat/:${quran.nomor}'">
+  return ` <li class="box" onclick="location.href='surat.html?surat/:${quran.nomor}'">
 
             <div class="box-left">
               <div class="border">
