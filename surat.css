@@ -364,8 +364,18 @@ button:nth-child(2):hover {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 80px;
+  height: -80px;
   background-color: whitesmoke;
+  opacity: 0;
+  pointer-events: none;
+
+  transition: all 0.2s ease;
+}
+
+.media-player.show {
+  pointer-events: initial;
+  opacity: 1;
+  height: 80px;
 }
 
 .progres-area {
@@ -374,14 +384,15 @@ button:nth-child(2):hover {
   background-color: darkturquoise;
   cursor: pointer;
   border-radius: 20px;
+  position: relative;
 }
 
 .progres-bar::before {
   content: "";
   position: absolute;
   top: 50%;
-  right: 0;
-  transform: translateY(-50%) translateX(5px);
+  right: -5px;
+  transform: translateY(-50%);
   width: 10px;
   height: 10px;
   background-color: #2ca4ab;
@@ -389,7 +400,7 @@ button:nth-child(2):hover {
 }
 
 .progres-bar {
-  width: 50%;
+  width: 1%;
   height: inherit;
   background-color: #176b87;
   position: relative;
@@ -418,9 +429,13 @@ button:nth-child(2):hover {
   user-select: none;
 }
 
-.duration {
+.duration,
+.current {
   margin-right: 40px;
+  width: 70px;
+  height: 20px;
 }
+
 .control-btn {
   display: flex;
   align-items: center;
@@ -471,4 +486,95 @@ button:nth-child(2):hover {
 ::-webkit-scrollbar-thumb {
   background: #176b87;
   border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+  .duration,
+  .current {
+    margin-right: 40px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .control-btn {
+    display: flex;
+    align-items: center;
+  }
+  .control-btn span {
+    font-size: 2rem;
+    cursor: pointer;
+    margin-inline: 5px;
+    padding: 2px;
+  }
+
+  .control-btn span:first-child,
+  .control-btn span:last-child {
+    font-size: 2rem;
+    margin: 0 20px;
+  }
+}
+
+@media (max-width: 567px) {
+  html {
+    font-size: 60%;
+  }
+  .duration {
+    margin-right: 40px;
+
+    width: 5px;
+    height: 10px;
+    font-size: 1rem;
+  }
+
+  .current {
+    margin-left: 10px;
+
+    width: 10px;
+    height: 10px;
+    font-size: 1rem;
+  }
+
+  .control-btn span {
+    font-size: 2rem;
+    cursor: pointer;
+    margin-inline: 8px;
+    padding: 2px;
+  }
+
+  .control-btn span:first-child,
+  .control-btn span:last-child {
+    font-size: 1.25rem;
+    margin: 0 10px;
+  }
+  .media-logo {
+    display: none;
+  }
+
+  .media-logo img {
+    display: none;
+  }
+  .halaman {
+    padding: 3rem 3%;
+  }
+  .bottom-pagination {
+    gap: 5px;
+  }
+
+  .bottom-pagination button {
+    font-size: 1rem;
+  }
+
+  button:nth-child(2) {
+    padding: 1rem 1px;
+    border: 2px solid #dfdfdf;
+  }
+
+  .arrow a {
+    padding: 1rem 5px;
+    display: flex;
+    align-items: center;
+  }
+  .arrow a span {
+    font-size: 10px;
+  }
 }

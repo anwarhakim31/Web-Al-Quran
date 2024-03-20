@@ -73,7 +73,7 @@ Promise.all([request1, request2])
     });
     bodysurat.innerHTML = isi;
 
-    getAudioSrc();
+    getAudioSrc(); //function getaudiosrc
 
     const variableValue1 = data1.data.suratSebelumnya.nomor;
     const variableValue2 = data1.data.suratSelanjutnya.nomor;
@@ -83,7 +83,7 @@ Promise.all([request1, request2])
   .catch((eror) => {
     console.log(eror);
   });
-
+const mediaplayer = document.querySelector(".media-player");
 const audioplayer = document.querySelector(".audio-player");
 
 function getAudioSrc() {
@@ -110,12 +110,31 @@ function getAudioSrc() {
   btnNext(srcArray);
   btnPre(srcArray);
 
-  //saat audio mau habis berganti surah
+  //saat audio mau habis berganti ayat
   audioplayer.addEventListener("ended", function () {
-    nextSurah(srcArray);
+    console.log(currentAudioIndex == srcArray.length - 1);
+    if (currentAudioIndex == srcArray.length - 1) {
+      mediaplayer.classList.remove("show");
+    } else {
+      nextSurah(srcArray);
+    }
   });
 
   audioplayer.src = srcArray[currentAudioIndex];
+  playbodybtn(srcArray);
+}
+
+function playbodybtn(srcArray) {
+  window.addEventListener("click", function (e) {
+    const btnplay = e.target;
+    if (btnplay.classList.contains("play")) {
+      const li = btnplay.parentElement.parentElement;
+      const liIndex = li.getAttribute("li-index");
+      currentAudioIndex = liIndex;
+      audioplayer.setAttribute("src", srcArray[currentAudioIndex]);
+      playmusic();
+    }
+  });
 }
 
 const PlayPause = document.querySelector(".play-pause");
@@ -126,6 +145,7 @@ function playmusic() {
   container.classList.add("active");
   audioplayer.play();
   PlayPause.textContent = "pause";
+  mediaplayer.classList.add("show");
 }
 function pausemusic() {
   container.classList.remove("active");
@@ -173,24 +193,54 @@ function btnPre(srcArray) {
   });
 }
 
-// Tambahkan event listener untuk menangani saat metadata audio telah dimuat
-audioplayer.addEventListener("loadedmetadata", function () {
-  // Durasi audio tersedia setelah metadata audio dimuat
-  const durationInSeconds = audioplayer.duration; // Durasi audio dalam detik
-  console.log("Durasi audio:", durationInSeconds, "detik");
+function zero(nomor) {
+  return nomor < 10 ? "0" + nomor : nomor;
+}
+
+const progresbar = document.querySelector(".progres-bar");
+let currentT = document.querySelector(".current");
+let durationT = document.querySelector(".duration");
+
+audioplayer.addEventListener("timeupdate", function (e) {
+  const currentTime = e.target.currentTime;
+  const duration = e.target.duration;
+  let progresWidth = (currentTime / duration) * 100;
+  progresbar.style.width = `${progresWidth}%`;
+
+  audioplayer.addEventListener("loadeddata", function () {
+    let audioDuration = e.target.duration;
+    let tmenit = Math.floor(audioDuration / 60);
+    let tdetik = Math.floor(audioDuration % 60);
+
+    tmenit = zero(tmenit);
+    tdetik = zero(tdetik);
+    durationT.innerText = `${tmenit}:${tdetik}`;
+  });
+
+  let tmenit = Math.floor(currentTime / 60);
+  let tdetik = Math.floor(currentTime % 60);
+  tmenit = zero(tmenit);
+  tdetik = zero(tdetik);
+  currentT.innerText = `${tmenit}:${tdetik}`;
 });
 
-// Memuat metadata audio
-audioplayer.load();
+const progrestArea = document.querySelector(".progres-area");
 
-// window.addEventListener("click", function (e) {
-//   const btnplay = e.target;
-//   if (btnplay.classList.contains("play")) {
-//     const audio = btnplay.previousElementSibling;
-//     audioplayer.setAttribute("src", audio.src);
-//     playmusic();
-//   }
-// });
+progrestArea.addEventListener("click", (e) => {
+  let progressWidth = progrestArea.clientWidth; //
+  let clickedOffsetX = e.offsetX; //getting offset x value
+  let songDuration = audioplayer.duration; //getting song total duration
+
+  audioplayer.currentTime = (clickedOffsetX / progressWidth) * songDuration;
+  playmusic();
+});
+
+const closeBtn = document.querySelector(".close-btn");
+
+closeBtn.addEventListener("click", function () {
+  mediaplayer.classList.remove("show");
+  pausemusic();
+});
 
 // <!-- button pagination -->//
 
@@ -229,7 +279,7 @@ function getNext(variableValue2) {
 //==================================================================//
 
 function template(ayat, noSurah, value, i) {
-  return `<li class="ayat" li-index="${i + 1}">
+  return `<li class="ayat" li-index="${i}">
             
             <div class="navigation">
               <p class="no-noayat">${noSurah}:${ayat.nomorAyat}</p>
@@ -241,9 +291,7 @@ function template(ayat, noSurah, value, i) {
             </div>
             <div class="text">
                 <div class="arabic-text">${ayat.teksArab}
-              <span class="symbol">۝<span class="number">${
-                ayat.no
-              }</span></span>
+              <span class="symbol">۝<span class="number">${ayat.no}</span></span>
             </div>
               <p class="latin-text">${ayat.teksLatin}</p>
               <span class="arti-text">${ayat.teksIndonesia}</span>
