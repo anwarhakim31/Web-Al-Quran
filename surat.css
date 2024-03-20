@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -199,8 +200,40 @@ header {
   padding: 2rem;
   border-bottom: 1px solid #dfdfdf;
   font-family: "poppins";
+  display: flex;
+  position: relative;
+}
+.body-surat .text {
+  width: 100%;
+  margin-left: 5px;
 }
 
+.ayat .navigation {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding-inline: 0.5rem;
+  gap: 0.1rem;
+}
+
+.ayat .navigation p {
+  font-weight: 400;
+  pointer-events: none;
+}
+
+.ayat .navigation span {
+  font-weight: 300;
+  cursor: pointer;
+  color: #555;
+  padding: 5px;
+}
+.ayat .navigation span:hover {
+  background-color: #2ca4ab;
+  border-radius: 50%;
+  padding: 5px;
+  color: white;
+}
 .arabic-text {
   font-size: 2rem; /* Ukuran font untuk teks Arab */
   direction: rtl; /* Arah teks dari kanan ke kiri */
@@ -264,6 +297,162 @@ header {
   animation: loading 0.75s ease infinite;
 }
 
+.bottom-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding-bottom: 2.5rem;
+}
+
+.bottom-pagination button {
+  border-color: #176b87;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  color: #555;
+  background-color: white;
+  user-select: none;
+  border-radius: 5px;
+}
+
+button:nth-child(2) {
+  padding: 0.5rem;
+  border: 2px solid #dfdfdf;
+}
+
+button:nth-child(2):hover {
+  border: 2px solid #2ca4ab;
+}
+
+.bottom-pagination button a:hover {
+  border: 2px solid #2ca4ab;
+}
+
+.arrow a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #555;
+  border: 2px solid #dfdfdf;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+.arrow a span {
+  font-size: 20px;
+  color: #555;
+}
+
+.footer {
+  text-align: center;
+  padding: 3rem 10%;
+  background-color: #176b87;
+  color: white;
+  margin-top: 20px;
+}
+
+.hidden-pagination {
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+/* <<<<<<<<<<<<<<<<<<<<<<<<<<<media player>>>>>>>>>>>>>>>>>>>>>>>>> */
+
+.media-player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background-color: whitesmoke;
+}
+
+.progres-area {
+  width: 100%;
+  height: 3px;
+  background-color: darkturquoise;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.progres-bar::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%) translateX(5px);
+  width: 10px;
+  height: 10px;
+  background-color: #2ca4ab;
+  border-radius: 50%;
+}
+
+.progres-bar {
+  width: 50%;
+  height: inherit;
+  background-color: #176b87;
+  position: relative;
+}
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.media-logo {
+  height: 70px;
+  width: 70px;
+  margin-right: 10px;
+}
+
+.media-logo img {
+  width: 100%;
+  height: 100%;
+}
+
+.control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: inherit;
+  user-select: none;
+}
+
+.duration {
+  margin-right: 40px;
+}
+.control-btn {
+  display: flex;
+  align-items: center;
+}
+.control-btn span {
+  font-size: 3rem;
+  cursor: pointer;
+  margin-inline: 10px;
+  padding: 2px;
+}
+
+.control-btn span:hover {
+  background-color: #b7edf0;
+  border-radius: 50%;
+  padding: 2px;
+}
+
+.control-btn span:first-child,
+.control-btn span:last-child {
+  font-size: 2rem;
+  margin: 0 35px;
+}
+
+.control-btn span:nth-child(3) {
+  padding: 5px;
+  background-color: #b7edf0;
+  border-radius: 50%;
+}
+.control-btn span:nth-child(3):hover {
+  background-color: #2ca4ab;
+}
+
 @keyframes loading {
   from {
     transform: rotate (0turn);
@@ -271,4 +460,15 @@ header {
   to {
     transform: rotate(1turn);
   }
+}
+::-webkit-scrollbar {
+  width: 15px;
+}
+::-webkit-scrollbar-track {
+  background: #dfdfdf;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #176b87;
+  border-radius: 20px;
 }

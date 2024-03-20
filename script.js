@@ -79,7 +79,7 @@ function sort(datas) {
 }
 
 function template(quran) {
-  return ` <li class="box" onclick="location.href='surat.html?surat/:${quran.nomor}'">
+  return ` <li class="box" onclick="location.href='surat.html?/${quran.nomor}'">
 
             <div class="box-left">
               <div class="border">
@@ -102,3 +102,12 @@ function template(quran) {
      
           </li>`;
 }
+
+document.addEventListener("DOMContentLoaded", function (event) {
+  var scrollpos = localStorage.getItem("scrollpos");
+  if (scrollpos) window.scrollTo(0, scrollpos);
+});
+
+window.onscroll = function (e) {
+  localStorage.setItem("scrollpos", window.scrollY);
+};

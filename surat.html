@@ -13,7 +13,15 @@
       rel="stylesheet"
     />
     <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
   </head>
@@ -125,11 +133,52 @@
         </div>
         <ul class="body-surat"></ul>
       </section>
+
+      <section class="bottom-pagination">
+        <button class="prev-btn arrow">
+          <a href="">
+            <span class="material-symbols-outlined"> arrow_back_ios </span>Surah
+            Sebelumnya
+          </a>
+        </button>
+        <button class="ToTop-btn">Awal dari Surah</button>
+        <button class="next-btn arrow">
+          <a href="">
+            Surah Berikutnya<span class="material-symbols-outlined">
+              arrow_forward_ios
+            </span>
+          </a>
+        </button>
+      </section>
+
+      <section class="media-player">
+        <div class="progres-area">
+          <div class="progres-bar"></div>
+          <audio src="" class="audio-player"></audio>
+        </div>
+        <div class="control">
+          <div class="left">
+            <div class="media-logo">
+              <img src="images/alquran.png" alt="" />
+            </div>
+
+            <span class="current"> 00:00 </span>
+          </div>
+          <div class="control-btn">
+            <span class="material-icons"> more_horiz </span>
+            <span class="material-icons rewind-btn"> fast_rewind </span>
+            <span class="material-icons play-pause"> play_arrow </span>
+            <span class="material-icons forward-btn"> fast_forward </span>
+            <span class="material-icons"> close </span>
+          </div>
+          <span class="duration">00:00</span>
+        </div>
+      </section>
     </div>
 
-    <!-- <div class="footer">
-      <p>Copyright&copy;2024 Anwar Hakim All Right Reseved</p>
-    </div> -->
+    <div class="footer">
+      <p>Copyright&copy; 2024 Anwar Hakim All Right Reseved</p>
+    </div>
     <div class="loader"></div>
     <script src="surat.js"></script>
   </body>
