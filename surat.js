@@ -122,6 +122,7 @@ function getAudioSrc() {
 
   audioplayer.src = srcArray[currentAudioIndex];
   playbodybtn(srcArray);
+  copytextbtn();
 }
 
 function playbodybtn(srcArray) {
@@ -134,6 +135,27 @@ function playbodybtn(srcArray) {
       audioplayer.setAttribute("src", srcArray[currentAudioIndex]);
       playmusic();
     }
+  });
+}
+
+function copytextbtn() {
+  const copy = document.querySelectorAll(".copy");
+
+  copy.forEach((copy) => {
+    copy.onclick = (e) => {
+      const li = e.target.parentElement.parentElement;
+
+      const arabicText = li.querySelector(".arabic-text").textContent;
+      const artiText = li.querySelector(".arti-text").textContent;
+      const noayatt = li.querySelector(".no-noayat").textContent;
+      const newarabicText = arabicText.split("۝۱");
+      // const newarabic = newarabicText.split("۱")
+      const Text = newarabicText.join("\n");
+      const textCopy = `${noayatt} ${Text}
+          ${artiText}`;
+      console.log(textCopy);
+      navigator.clipboard.writeText(textCopy);
+    };
   });
 }
 
@@ -286,8 +308,8 @@ function template(ayat, noSurah, value, i) {
               <audio src="${value}" class="audios"></audio>
               <span class="material-symbols-outlined play"> play_arrow </span>
                   
-              <span class="material-symbols-outlined"> bookmarks </span>
-              <span class="material-symbols-outlined"> content_copy </span>
+              <span class="material-symbols-outlined book"> bookmarks </span>
+              <span class="material-symbols-outlined copy"> content_copy </span>
             </div>
             <div class="text">
                 <div class="arabic-text">${ayat.teksArab}
