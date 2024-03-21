@@ -17,11 +17,32 @@ let nextpage;
 var lastscrolltop = 0;
 currentAudioIndex = 0;
 
+const header = document.querySelector("header");
+const bnav = document.querySelector(".bnav");
+const updown = document.querySelector(".updown");
+const containers = document.querySelector(".container");
+const sidebar = document.querySelector(".sidebar");
+
 window.addEventListener("scroll", () => {
   let scrolltop = window.pageYOffset || document.documentElement.scrolltop;
 
   if (scrolltop > lastscrolltop) {
+    header.classList.add("active");
+    bnav.classList.add("active");
   } else {
+    header.classList.remove("active");
+    bnav.classList.remove("active");
+  }
+});
+
+updown.addEventListener("click", function () {
+  sidebar.classList.toggle("show");
+  containers.classList.toggle("shift");
+
+  if (updown.textContent === "arrow_drop_down") {
+    updown.textContent = "arrow_drop_up";
+  } else {
+    updown.textContent = "arrow_drop_down";
   }
 });
 
@@ -49,11 +70,12 @@ const detailpage = document.querySelector(".detail");
 
 Promise.all([request1, request2])
   .then(([data1, data2]) => {
+    document.querySelector(".name").textContent = data1.data.namaLatin;
     document.querySelector(".arabicname").textContent = data2.data.name;
-
     document.querySelector(".part").textContent = data1.data.tempatTurun;
     document.querySelector(".total").textContent = data1.data.jumlahAyat;
     document.querySelector(".namalatin").textContent = data1.data.namaLatin;
+
     const bodysurat = document.querySelector(".body-surat");
 
     const ayat = data1.data.ayat;
@@ -61,6 +83,7 @@ Promise.all([request1, request2])
     loadingscreen();
 
     const noSurah = data1.data.nomor;
+
     let isi = "";
 
     ayat.forEach((ayat, i) => {
@@ -112,7 +135,13 @@ function getAudioSrc() {
 
   //saat audio mau habis berganti ayat
   audioplayer.addEventListener("ended", function () {
-    console.log(currentAudioIndex == srcArray.length - 1);
+    const liayat = document.querySelectorAll(".ayat");
+    liayat.forEach((li) => {
+      if (currentAudioIndex == srcArray.length - 1) {
+        li.classList.remove("bgcolor");
+      }
+    });
+
     if (currentAudioIndex == srcArray.length - 1) {
       mediaplayer.classList.remove("show");
     } else {
@@ -133,7 +162,11 @@ function playbodybtn(srcArray) {
       const liIndex = li.getAttribute("li-index");
       currentAudioIndex = liIndex;
       audioplayer.setAttribute("src", srcArray[currentAudioIndex]);
+
       playmusic();
+
+      li.classList.add("bgcolor");
+      viewSroll();
     }
   });
 }
@@ -182,22 +215,47 @@ function nextSurah(srcArray) {
   currentAudioIndex++;
 
   if (currentAudioIndex >= srcArray.length) {
-    currentAudioIndex = 0;
+    currentAudioIndex = srcArray.length - 1;
   }
 
   audioplayer.setAttribute("src", srcArray[currentAudioIndex]);
   playmusic();
+
+  viewSroll();
 }
 
 function prevSurah(srcArray) {
   currentAudioIndex--;
 
   if (currentAudioIndex < 0) {
-    currentAudioIndex = srcArray.length - 1;
+    currentAudioIndex = 0;
   }
 
   audioplayer.setAttribute("src", srcArray[currentAudioIndex]);
   playmusic();
+
+  // Gulirkan ke elemen <li> yang dipilih
+  viewSroll();
+}
+
+function viewSroll() {
+  const Li = document.querySelectorAll(".ayat");
+
+  Li.forEach((liAyat) => {
+    if (liAyat.classList.contains("bgcolor")) {
+      liAyat.classList.remove("bgcolor");
+    }
+
+    if (liAyat.getAttribute("li-index") == currentAudioIndex) {
+      const currentLi = document.querySelector(
+        `li[li-index="${currentAudioIndex}"]`
+      );
+      if (currentLi) {
+        currentLi.classList.add("bgcolor");
+        currentLi.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+  });
 }
 
 function btnNext(srcArray) {
