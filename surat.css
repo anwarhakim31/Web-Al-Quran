@@ -19,7 +19,7 @@ header {
 
   z-index: 2;
   position: fixed;
-
+  opacity: 1;
   top: 0px;
   transition: all 0.2s linear;
   z-index: 999;
@@ -48,8 +48,8 @@ header.active {
 }
 
 .bnav.active {
-  top: -90px;
-  padding: 100px 4rem 10px;
+  top: -20px;
+  padding: 30px 4rem 10px;
   background-color: #176b87;
   color: white;
 }
@@ -177,10 +177,11 @@ header.active {
   height: 100vh;
   background-color: whitesmoke;
   padding-top: 60px;
-  display: none;
+  opacity: 0;
   z-index: 99;
   border-right: 1px solid #dfdfdf;
-  transition: top 0.3s linear;
+  pointer-events: none;
+  user-select: none;
 }
 
 .sidebar.down {
@@ -188,14 +189,27 @@ header.active {
 }
 
 .sidebar.show {
+  opacity: 1;
   display: flex;
   flex-direction: column;
+  animation: sideanimates 0.8s;
+  pointer-events: initial;
 }
 
 .sidebar .col {
   display: flex;
   flex-direction: column;
   flex: 1 1;
+  position: relative;
+  padding: 2rem 0;
+}
+
+.col .closed {
+  position: absolute;
+  right: 5px;
+  top: 0;
+  cursor: pointer;
+  user-select: none;
 }
 
 .sidebar .col .rows {
@@ -249,6 +263,30 @@ header.active {
 .sSurat {
   cursor: pointer;
   padding-block: 1px;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  p {
+    display: flex;
+    align-items: center;
+    padding-inline: 5px;
+    font-size: 1rem;
+  }
+
+  span {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 30px;
+  }
+}
+
+.sSurat.active {
+  font-weight: 600;
+}
+
+.sSurat:hover {
+  background-color: #cfcfcf;
 }
 
 .sAyat {
@@ -644,7 +682,11 @@ button:nth-child(2):hover {
 
 @media (max-width: 768px) {
   html {
-    font-size: 80%;
+    font-size: 95%;
+  }
+
+  .arabic-text {
+    font-size: 1.5rem;
   }
   .duration,
   .current {
@@ -669,16 +711,9 @@ button:nth-child(2):hover {
     font-size: 2rem;
     margin: 0 20px;
   }
-  .sidebar.show {
-    display: block;
-    width: 100%;
-  }
 }
 
 @media (max-width: 567px) {
-  html {
-    font-size: 60%;
-  }
   .duration {
     margin-right: 40px;
 
@@ -737,5 +772,39 @@ button:nth-child(2):hover {
   }
   .arrow a span {
     font-size: 10px;
+  }
+  .sidebar.show {
+    display: flex;
+    width: 100%;
+  }
+
+  .sidebar .list-surat .sSurat {
+    font-size: 2rem;
+
+    p {
+      font-size: 1rem;
+      padding: 0.5rem 5px;
+    }
+  }
+}
+@keyframes sideanimate {
+  from {
+    left: -300px;
+    opacity: 0;
+  }
+  to {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes sideanimates {
+  from {
+    left: 0px;
+    opacity: 1;
+  }
+  to {
+    left: -300px;
+    opacity: 0;
   }
 }

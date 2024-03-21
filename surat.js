@@ -11,45 +11,14 @@ let pathname = url.search.slice(1);
 let parts = pathname.split("/");
 // Get the value of the letiable "surat"
 let variableValue = parts[1]; // Get the second part (index 1)
-let nextpage;
 
 // Output the value
-var lastscrolltop = 0;
+var lastscrolltop = 5;
 currentAudioIndex = 0;
-
-const header = document.querySelector("header");
-const bnav = document.querySelector(".bnav");
-const updown = document.querySelector(".updown");
-const containers = document.querySelector(".container");
-const sidebar = document.querySelector(".sidebar");
-
-window.addEventListener("scroll", () => {
-  let scrolltop = window.pageYOffset || document.documentElement.scrolltop;
-
-  if (scrolltop > lastscrolltop) {
-    header.classList.add("active");
-    bnav.classList.add("active");
-    sidebar.classList.remove("down");
-  } else {
-    header.classList.remove("active");
-    bnav.classList.remove("active");
-    sidebar.classList.add("down");
-  }
-});
-
-updown.addEventListener("click", function () {
-  sidebar.classList.toggle("show");
-  containers.classList.toggle("shift");
-
-  if (updown.textContent === "arrow_drop_down") {
-    updown.textContent = "arrow_drop_up";
-  } else {
-    updown.textContent = "arrow_drop_down";
-  }
-});
 
 const url1 = `https://equran.id/api/v2/surat/`;
 const url2 = `http://api.alquran.cloud/v1/surah/`;
+const url3 = `https://equran.id/api/v2/surat`;
 
 const request1 = fetch(url1 + variableValue).then((response) => {
   if (!response.ok) {
@@ -64,14 +33,20 @@ const request2 = fetch(url2 + variableValue).then((response) => {
 
   return response.json();
 });
+const request3 = fetch(url3).then((response) => {
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  return response.json();
+});
 
 const nextbtn = document.querySelector(".next-btn");
 const prevbtn = document.querySelector(".prev-btn");
 const toTop = document.querySelector(".ToTop-btn");
 const detailpage = document.querySelector(".detail");
 
-Promise.all([request1, request2])
-  .then(([data1, data2]) => {
+Promise.all([request1, request2, request3])
+  .then(([data1, data2, data3]) => {
     document.querySelector(".name").textContent = data1.data.namaLatin;
     document.querySelector(".arabicname").textContent = data2.data.name;
     document.querySelector(".part").textContent = data1.data.tempatTurun;
@@ -96,6 +71,9 @@ Promise.all([request1, request2])
       ayat.no = convertToArabic(ayat.nomorAyat);
       isi += template(ayat, noSurah, value, i);
     });
+    const sideSurat = data3.data;
+    sideSurah(sideSurat);
+
     bodysurat.innerHTML = isi;
 
     getAudioSrc(); //function getaudiosrc
@@ -108,6 +86,7 @@ Promise.all([request1, request2])
   .catch((eror) => {
     console.log(eror);
   });
+
 const mediaplayer = document.querySelector(".media-player");
 const audioplayer = document.querySelector(".audio-player");
 
