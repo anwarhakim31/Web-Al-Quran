@@ -21,18 +21,12 @@ header {
   position: fixed;
 
   top: 0px;
-  transition: all 0.25s linear;
+  transition: all 0.2s linear;
   z-index: 999;
-  nav {
-    transition: all 0.3 linear;
-  }
 }
 header.active {
   top: -40px;
   background-color: #176b87;
-  nav {
-    opacity: 0;
-  }
 }
 
 .bnav {
@@ -42,7 +36,7 @@ header.active {
   width: 100%;
   padding: 5px 4rem;
 
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
   background-color: whitesmoke;
   z-index: 999;
   box-shadow: 0 5px 5px #cfcfcf;
@@ -54,8 +48,8 @@ header.active {
 }
 
 .bnav.active {
-  top: 0;
-  padding: 10px 4rem;
+  top: -90px;
+  padding: 100px 4rem 10px;
   background-color: #176b87;
   color: white;
 }
@@ -179,22 +173,105 @@ header.active {
   position: fixed;
   top: 0;
   left: 0;
-  width: 300px;
+  width: 340px;
   height: 100vh;
   background-color: whitesmoke;
   padding-top: 60px;
   display: none;
   z-index: 99;
   border-right: 1px solid #dfdfdf;
+  transition: top 0.3s linear;
+}
+
+.sidebar.down {
+  top: 60px;
 }
 
 .sidebar.show {
-  display: block;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .col {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1;
+}
+
+.sidebar .col .rows {
+  display: flex;
+  flex: 1 1;
+}
+
+.src-surat {
+  padding: 10px;
+  border-right: 1px solid #dfdfdf;
+  display: flex;
+  flex-direction: column;
+  flex: 2 1;
+}
+
+.src-ayat {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1;
+  padding: 10px;
+}
+
+.src-surat form {
+  padding-bottom: 20px;
+}
+
+.src-ayat form {
+  padding-bottom: 20px;
+}
+
+.list-container {
+  flex: 1 1;
+  position: relative;
+}
+
+.list-surat {
+  position: absolute;
+  inset: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.list-ayat {
+  position: absolute;
+  inset: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 10px;
+}
+.sSurat {
+  cursor: pointer;
+  padding-block: 1px;
+}
+
+.sAyat {
+  cursor: pointer;
+  padding-block: 1px;
+}
+
+.sidebar input {
+  width: 100%;
+  border: 1px solid white;
+  padding: 0.5rem 1rem;
+  outline: none;
+  border-radius: 5px;
+}
+
+.sidebar input:focus {
+  border: 1px solid #176b87;
 }
 
 .container.shift {
   display: block;
-  padding-left: 200px;
+  padding-left: 270px;
+  transition: all 0.5s ease;
 }
 
 .container {

@@ -29,9 +29,11 @@ window.addEventListener("scroll", () => {
   if (scrolltop > lastscrolltop) {
     header.classList.add("active");
     bnav.classList.add("active");
+    sidebar.classList.remove("down");
   } else {
     header.classList.remove("active");
     bnav.classList.remove("active");
+    sidebar.classList.add("down");
   }
 });
 
