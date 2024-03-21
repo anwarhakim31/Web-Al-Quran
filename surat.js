@@ -11,6 +11,7 @@ let pathname = url.search.slice(1);
 let parts = pathname.split("/");
 // Get the value of the letiable "surat"
 let variableValue = parts[1]; // Get the second part (index 1)
+let vars = parts[2];
 
 // Output the value
 var lastscrolltop = 5;
@@ -60,7 +61,7 @@ Promise.all([request1, request2, request3])
     loadingscreen();
 
     const noSurah = data1.data.nomor;
-
+    console.log(noSurah);
     let isi = "";
 
     ayat.forEach((ayat, i) => {
@@ -71,8 +72,9 @@ Promise.all([request1, request2, request3])
       ayat.no = convertToArabic(ayat.nomorAyat);
       isi += template(ayat, noSurah, value, i);
     });
-    const sideSurat = data3.data;
+    const sideSurat = data3.data; //ke sidesurat.js
     sideSurah(sideSurat);
+    // sideAyat(sideSurat);
 
     bodysurat.innerHTML = isi;
 
@@ -82,6 +84,10 @@ Promise.all([request1, request2, request3])
     const variableValue2 = data1.data.suratSelanjutnya.nomor;
     getPrev(variableValue1);
     getNext(variableValue2);
+
+    const allLi = document.querySelectorAll(".ayat");
+    lengthSurat(allLi);
+    surahayat(allLi);
   })
   .catch((eror) => {
     console.log(eror);
@@ -233,7 +239,7 @@ function viewSroll() {
       );
       if (currentLi) {
         currentLi.classList.add("bgcolor");
-        currentLi.scrollIntoView({ behavior: "smooth", block: "center" });
+        currentLi.scrollIntoView({ behavior: "smooth", block: "end" });
       }
     }
   });
@@ -393,3 +399,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
 window.onscroll = function (e) {
   localStorage.setItem("scrollpos", window.scrollY);
 };
+
+///////////surah ayat///////////
+function surahayat(allLi) {
+  allLi.forEach((no) => {
+    if (no.getAttribute("li-index") == vars) {
+      const kahfi = document.querySelector(`li[li-index="${vars - 1}"]`);
+      if (kahfi) {
+        kahfi.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+  });
+}

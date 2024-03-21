@@ -154,11 +154,12 @@ header {
 
 .top-page .populer {
   padding: 0.5rem;
-  background-color: #009788;
+  background-color: #2ca4ab;
   color: white;
   border-radius: 20px;
   cursor: pointer;
   font-weight: 300;
+  text-decoration: none;
 }
 
 .top-page .populer:hover {

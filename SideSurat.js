@@ -11,11 +11,12 @@ window.addEventListener("scroll", () => {
   if (scrolltop > lastscrolltop) {
     header.classList.add("active");
     bnav.classList.add("active");
-    sidebar.classList.remove("down");
+
+    sidebar.classList.add("down");
   } else {
     header.classList.remove("active");
     bnav.classList.remove("active");
-    sidebar.classList.add("down");
+    sidebar.classList.remove("down");
   }
 });
 
@@ -52,9 +53,51 @@ function sideSurah(sideSurat) {
     const nomor = url.split("/")[1];
     if (nomor == variableValue) {
       liside.classList.add("active");
+
+      const li = document.querySelector(`.sSurat a[href="${url}"]`);
+      if (li) {
+        li.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
     }
   });
 }
+
+function lengthSurat(allLi) {
+  const ul = document.querySelector(".list-ayat");
+  let nomor = "";
+  allLi.forEach((ayat, i) => {
+    nomor += `  <li class="sAyat">
+                   <p>${i + 1}</p>
+                 </li>`;
+  });
+  ul.innerHTML = nomor;
+}
+
+window.addEventListener("click", function (e) {
+  const sAyat = document.querySelectorAll(".sAyat");
+
+  sAyat.forEach((number) => {
+    number.classList.remove("active");
+  });
+
+  const liAyat = document.querySelectorAll(".ayat");
+
+  if (e.target.classList.contains("sAyat")) {
+    const number = e.target.firstElementChild.textContent;
+
+    e.target.classList.add("active");
+
+    liAyat.forEach((getLi) => {
+      if (getLi.getAttribute("li-index") == number - 1) {
+        const scrolls = document.querySelector(`li[li-index="${number - 1}"]`);
+
+        if (scrolls) {
+          scrolls.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }
+    });
+  }
+});
 
 close.addEventListener("click", function () {
   updown.textContent = "arrow_drop_down";
