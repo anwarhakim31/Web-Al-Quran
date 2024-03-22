@@ -411,9 +411,50 @@ function kahfi(allLi, vars) {
   });
 }
 
-const toggle = document.querySelector(".toggle");
-const body = document.querySelector("body");
+const searchbtn = document.querySelector(".search-btn");
+const searcharea = document.querySelector(".search-area");
+const searchclose = document.querySelector(".search-close");
+const searchinput = document.querySelector(".input-search");
+const searchform = document.querySelector(".search-form");
 
-toggle.addEventListener("click", function () {
-  body.classList.toggle("active");
+searchbtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  searcharea.classList.add("search-show");
+  searchinput.focus();
 });
+
+searchclose.onclick = () => {
+  searcharea.classList.remove("search-show");
+};
+
+window.addEventListener("click", function (e) {
+  //   if(!searchform.contains(e.target))
+  if (!searchform.contains(e.target) && !searchbtn.contains(e.target)) {
+    searcharea.classList.remove("search-show");
+  }
+});
+
+const body = document.querySelector("body");
+const toggle = document.querySelector(".toggle");
+const key = "lightdark";
+
+window.addEventListener("DOMContentLoaded", function () {
+  const storedData = getLs(); // Ambil data dari localStorage
+  if (storedData.length > 0 && storedData[0].enable) {
+    body.classList.add("active"); // Tambahkan kelas 'active' jika data tersimpan dan enable true
+  }
+});
+
+toggle.addEventListener("click", () => {
+  body.classList.toggle("active");
+  lightDrake(body.classList.contains("active")); // Kirim nilai berdasarkan apakah 'active' ada di body atau tidak
+});
+
+function lightDrake(enable) {
+  const obj = { enable };
+  localStorage.setItem(key, JSON.stringify([obj])); // Simpan data baru sebagai array tunggal
+}
+
+function getLs() {
+  return localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : [];
+}

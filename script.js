@@ -121,7 +121,25 @@ function loadingscreen() {
 
 const body = document.querySelector("body");
 const toggle = document.querySelector(".toggle");
+const key = "lightdark";
+
+window.addEventListener("DOMContentLoaded", function () {
+  const storedData = getLs(); // Ambil data dari localStorage
+  if (storedData.length > 0 && storedData[0].enable) {
+    body.classList.add("active"); // Tambahkan kelas 'active' jika data tersimpan dan enable true
+  }
+});
 
 toggle.addEventListener("click", () => {
   body.classList.toggle("active");
+  lightDrake(body.classList.contains("active")); // Kirim nilai berdasarkan apakah 'active' ada di body atau tidak
 });
+
+function lightDrake(enable) {
+  const obj = { enable };
+  localStorage.setItem(key, JSON.stringify([obj])); // Simpan data baru sebagai array tunggal
+}
+
+function getLs() {
+  return localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : [];
+}

@@ -91,6 +91,13 @@ body.active {
     background-color: #111827;
     border-radius: 10px;
   }
+  .list-ayat::-webkit-scrollbar-thumb {
+    background-color: white;
+  }
+  .list-ayat::-webkit-scrollbar-track {
+    background-color: #111827;
+    border-radius: 10px;
+  }
 }
 
 header {
@@ -200,7 +207,7 @@ header.active {
   left: 0;
   width: 100%;
   height: 100vh;
-  z-index: 3;
+  z-index: 1000;
   padding: 8rem 10% 0;
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(2px);
