@@ -10,6 +10,20 @@ body {
   color: #000;
 }
 
+body.active {
+  background-color: #1d2432;
+  color: white;
+  header {
+    background-color: #1d2432;
+  }
+  .box {
+    background-color: #111827;
+    img {
+      z-index: 0;
+    }
+  }
+}
+
 header {
   width: 100%;
   background-color: whitesmoke;
@@ -150,6 +164,7 @@ header {
   justify-content: center;
   flex-wrap: wrap;
   gap: 0.5rem;
+  user-select: none;
 }
 
 .top-page .populer {
@@ -211,6 +226,7 @@ header {
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+  user-select: none;
 }
 
 .box:hover {
@@ -296,6 +312,13 @@ header {
   background-color: #176b87;
   color: white;
   margin-top: 20px;
+  opacity: 0;
+  display: none;
+}
+
+.footer.active {
+  opacity: 1;
+  display: block;
 }
 @media (max-width: 500px) {
   .banner {

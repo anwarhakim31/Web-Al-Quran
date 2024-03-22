@@ -12,6 +12,87 @@ body {
   overflow-x: hidden;
 }
 
+body.active {
+  background-color: #1d2432;
+  color: white;
+  header {
+    background-color: #176b87;
+  }
+  .detail {
+    color: white;
+    span {
+      color: white;
+    }
+    .arabicname {
+      color: white;
+    }
+    .namalatin {
+      color: white;
+    }
+    .total::before {
+      background-color: white;
+    }
+  }
+  .box {
+    background-color: #111827;
+    img {
+      z-index: 0;
+    }
+  }
+  svg path {
+    fill: white;
+  }
+  .bnav {
+    background-color: #176b87;
+    box-shadow: 0 5px 5px #111827;
+  }
+  .body-surat li:first-child {
+    border-top: 2px solid #176b87;
+  }
+  .ayat {
+    border-top: 0px solid black;
+    border: 1px solid #176b87;
+    background-color: #111827;
+  }
+  .ayat span {
+    color: white;
+  }
+  .ayat .symbol {
+    color: #176b87;
+  }
+  button {
+    background-color: #111827;
+    border-color: #176b87;
+    color: white;
+    a {
+      border-color: #176b87;
+      color: white;
+      span {
+        color: white;
+      }
+    }
+  }
+  .sidebar {
+    background-color: #176b87;
+    p {
+      color: white;
+    }
+    .sSurat.active {
+      background-color: #176b87;
+    }
+    .sAyat.active {
+      background-color: #176b87;
+    }
+  }
+  .list-surat::-webkit-scrollbar-thumb {
+    background-color: white;
+  }
+  .list-surat::-webkit-scrollbar-track {
+    background-color: #111827;
+    border-radius: 10px;
+  }
+}
+
 header {
   width: 100%;
   background-color: whitesmoke;
@@ -187,6 +268,9 @@ header.active {
 
 .sidebar.down {
   top: 0;
+  .col {
+    padding: 2rem 0;
+  }
 }
 
 .sidebar.show {
@@ -203,7 +287,7 @@ header.active {
   flex-direction: column;
   flex: 1 1 100vh;
   position: relative;
-  padding: 2rem 0;
+  padding: 2rem 0 5rem;
   overflow: hidden;
 }
 
@@ -277,7 +361,7 @@ header.active {
   p {
     display: flex;
     align-items: center;
-    padding-inline: 5px;
+
     font-size: 1rem;
   }
 
@@ -809,6 +893,24 @@ button:nth-child(2):hover {
       font-size: 1rem;
       padding: 0.5rem 5px;
     }
+  }
+  .bottom-pagination button {
+    font-size: 0.8rem;
+
+    a {
+      padding: 0.2rem;
+    }
+  }
+
+  .bottom-pagination button:nth-child(2) {
+    padding: 0.3rem;
+  }
+  .arabic-text {
+    font-size: 1.5rem;
+  }
+  .latin-text,
+  .arti-text {
+    font-size: 0.85rem;
   }
 }
 @keyframes sideanimate {

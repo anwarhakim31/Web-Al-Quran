@@ -3,7 +3,6 @@ const searcharea = document.querySelector(".search-area");
 const searchclose = document.querySelector(".search-close");
 const searchinput = document.querySelector(".input-search");
 const searchform = document.querySelector(".search-form");
-const body = document.querySelector("body");
 
 searchbtn.addEventListener("click", function (e) {
   e.preventDefault();
@@ -32,6 +31,7 @@ function getsurah() {
       if (!response) {
         throw new Error(Response.status);
       }
+      loadingscreen();
       return response.json();
     })
     .then(({ data }) => {
@@ -111,3 +111,17 @@ document.addEventListener("DOMContentLoaded", function (event) {
 window.onscroll = function (e) {
   localStorage.setItem("scrollpos", window.scrollY);
 };
+
+function loadingscreen() {
+  const load = document.querySelector(".footer");
+  setTimeout(() => {
+    load.classList.add("active");
+  }, 500);
+}
+
+const body = document.querySelector("body");
+const toggle = document.querySelector(".toggle");
+
+toggle.addEventListener("click", () => {
+  body.classList.toggle("active");
+});

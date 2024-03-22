@@ -14,7 +14,7 @@ let variableValue = parts[1]; // Get the second part (index 1)
 let vars = parts[2];
 
 // Output the value
-var lastscrolltop = 5;
+
 currentAudioIndex = 0;
 
 const url1 = `https://equran.id/api/v2/surat/`;
@@ -61,7 +61,7 @@ Promise.all([request1, request2, request3])
     loadingscreen();
 
     const noSurah = data1.data.nomor;
-    console.log(noSurah);
+
     let isi = "";
 
     ayat.forEach((ayat, i) => {
@@ -72,9 +72,10 @@ Promise.all([request1, request2, request3])
       ayat.no = convertToArabic(ayat.nomorAyat);
       isi += template(ayat, noSurah, value, i);
     });
+    const allLi = document.querySelectorAll(".ayat");
+    kahfi(allLi, vars);
     const sideSurat = data3.data; //ke sidesurat.js
     sideSurah(sideSurat);
-    // sideAyat(sideSurat);
 
     bodysurat.innerHTML = isi;
 
@@ -85,9 +86,9 @@ Promise.all([request1, request2, request3])
     getPrev(variableValue1);
     getNext(variableValue2);
 
-    const allLi = document.querySelectorAll(".ayat");
-    lengthSurat(allLi);
-    surahayat(allLi);
+    lengthSurat(ayat);
+
+    // <!-- mencari surat alkafi -->
   })
   .catch((eror) => {
     console.log(eror);
@@ -372,9 +373,6 @@ function loadingscreen() {
   load.classList.add("loader-hidden");
 }
 
-const toggle = document.querySelector(".toggle");
-const body = document.querySelector("body");
-
 function convertToArabic(number) {
   const arabicNumerals = ["۰", "۱", "۲", "۳", "٤", "۵", "٦", "۷", "۸", "۹"];
   const digits = number.toString().split("");
@@ -401,8 +399,9 @@ window.onscroll = function (e) {
 };
 
 ///////////surah ayat///////////
-function surahayat(allLi) {
+function kahfi(allLi, vars) {
   allLi.forEach((no) => {
+    console.log(no.getAttribute("li-index") == vars);
     if (no.getAttribute("li-index") == vars) {
       const kahfi = document.querySelector(`li[li-index="${vars - 1}"]`);
       if (kahfi) {
@@ -411,3 +410,10 @@ function surahayat(allLi) {
     }
   });
 }
+
+const toggle = document.querySelector(".toggle");
+const body = document.querySelector("body");
+
+toggle.addEventListener("click", function () {
+  body.classList.toggle("active");
+});
