@@ -124,22 +124,31 @@ const toggle = document.querySelector(".toggle");
 const key = "lightdark";
 
 window.addEventListener("DOMContentLoaded", function () {
-  const storedData = getLs(); // Ambil data dari localStorage
-  if (storedData.length > 0 && storedData[0].enable) {
-    body.classList.add("active"); // Tambahkan kelas 'active' jika data tersimpan dan enable true
+  const obj = getLS();
+
+  if (obj.length > 0 && obj[0].enable) {
+    body.classList.add("active");
+  } else {
+    body.classList.remove("active");
   }
 });
 
-toggle.addEventListener("click", () => {
+toggle.addEventListener("click", function () {
   body.classList.toggle("active");
-  lightDrake(body.classList.contains("active")); // Kirim nilai berdasarkan apakah 'active' ada di body atau tidak
+
+  if (body.classList.contains("active")) {
+    lightdark(true);
+  } else {
+    lightdark(false);
+  }
 });
 
-function lightDrake(enable) {
+function lightdark(enable) {
   const obj = { enable };
-  localStorage.setItem(key, JSON.stringify([obj])); // Simpan data baru sebagai array tunggal
+
+  localStorage.setItem(key, JSON.stringify([obj]));
 }
 
-function getLs() {
+function getLS() {
   return localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : [];
 }

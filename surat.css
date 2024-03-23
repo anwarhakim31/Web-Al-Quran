@@ -773,6 +773,20 @@ button:nth-child(2):hover {
   background-color: #2ca4ab;
 }
 
+.notif {
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #176b87;
+  width: 200px;
+  height: 50px;
+  border-radius: 10px;
+  color: white;
+  display: none;
+  place-items: center;
+}
+
 @keyframes loading {
   from {
     transform: rotate (0turn);

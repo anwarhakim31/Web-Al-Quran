@@ -163,9 +163,23 @@ function copytextbtn() {
   const copy = document.querySelectorAll(".copy");
 
   copy.forEach((copy) => {
+    let timeduration = 500;
     copy.onclick = (e) => {
-      const li = e.target.parentElement.parentElement;
+      const div = document.createElement("div");
+      div.className = "notif";
+      container.appendChild(div);
+      const p = document.createElement("p");
+      p.innerHTML = `Ayat Berhasil Disalin`;
+      div.appendChild(p);
 
+      div.style.display = "grid";
+
+      setTimeout(() => {
+        div.style.display = "none";
+      }, timeduration);
+      timeduration += 500;
+
+      const li = e.target.parentElement.parentElement;
       const arabicText = li.querySelector(".arabic-text").textContent;
       const artiText = li.querySelector(".arti-text").textContent;
       const noayatt = li.querySelector(".no-noayat").textContent;
