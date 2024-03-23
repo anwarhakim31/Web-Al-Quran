@@ -20,7 +20,7 @@ website ini mengguanakan Api dari:
 - https://equran.id/apidev/v2
 - https://alquran.cloud/api
 
-website ini mengguanakan Api dari:
+website ini merefrensikan tampilan dari:
 - https://quran.com/id
 - https://quran.nu.or.id/
 
