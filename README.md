@@ -20,6 +20,10 @@ website ini mengguanakan Api dari:
 - https://equran.id/apidev/v2
 - https://alquran.cloud/api
 
+website ini mengguanakan Api dari:
+- https://quran.com/id
+- https://quran.nu.or.id/
+
 # Tech Stack 🛠️
 - ![HTML](https://img.shields.io/badge/-HTML-050f2c?style=flat&logo=HTML5)&nbsp;
 - ![CSS](https://img.shields.io/badge/-CSS-050f2c?style=flat&logo=CSS3&logoColor=1572B6)&nbsp;
