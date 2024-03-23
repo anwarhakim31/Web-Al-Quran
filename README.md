@@ -28,7 +28,7 @@ website ini mengguanakan Api dari:
 
 ## Fitur Website 🌟
 
-1. Toggle Light/Dark Background
+1. Toggle Light/Dark Background (localStorage)
 
 
 2. Toggle Sort Surah ke Ascending & Descending 
@@ -38,6 +38,6 @@ website ini mengguanakan Api dari:
 
 4. Sidebar untuk Menampilkan Pencarian Surah dan Nomor Surah 
  
-5. Bookmark (Masih Dalam Pengembangan) 📌
+5. Bookmark localstorage(Masih Dalam Pengembangan) 📌
 
 
