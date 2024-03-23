@@ -28,8 +28,6 @@ website ini mengguanakan Api dari:
 
 ## Fitur Website 🌟
 
-Selamat datang di repositori untuk website Al-Qur'an interaktif! Berikut adalah daftar fitur-fitur menarik yang tersedia di website ini:
-
 1. Toggle Light/Dark Background
 
 
