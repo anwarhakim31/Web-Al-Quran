@@ -21,9 +21,9 @@ body.active {
     img {
       z-index: 0;
     }
-    span {
-      color: white;
-    }
+  }
+  .detail span {
+    color: white;
   }
 }
 

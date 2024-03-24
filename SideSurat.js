@@ -12,8 +12,9 @@ window.addEventListener("scroll", () => {
   if (scrolltop > lastscrolltop) {
     header.classList.add("active");
     bnav.classList.add("active");
-
+    bookmark.classList.remove("show");
     sidebar.classList.add("down");
+    bnav.style.zIndex = "999";
   } else {
     header.classList.remove("active");
     bnav.classList.remove("active");
@@ -156,27 +157,27 @@ function lengthSurat(ayat) {
   });
   ul.innerHTML = nomor;
 
-  window.addEventListener("scroll", function () {
-    // Periksa posisi halaman utama untuk setiap bagian
-    const liAyat = document.querySelectorAll(".ayat");
-    liAyat.forEach((li, i) => {
-      const rect = li.getBoundingClientRect();
+  // window.addEventListener("scroll", function () {
+  //   // Periksa posisi halaman utama untuk setiap bagian
+  //   const liAyat = document.querySelectorAll(".ayat");
+  //   liAyat.forEach((li, i) => {
+  //     const rect = li.getBoundingClientRect();
 
-      // Jika bagian tertentu dalam tampilan, beri warna pada elemen sidebar yang sesuai
-      const sAyatElements = document.querySelectorAll(".sAyat");
-      if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
-        // Setel warna latar belakang untuk elemen sidebar yang sesuai
-        sAyatElements[i].scrollIntoView(
-          (behavior = "smooth"),
-          (block = "center")
-        );
-        sAyatElements[i].classList.add("active");
-      } else {
-        // Hapus warna latar belakang jika tidak sesuai
-        sAyatElements[i].classList.remove("active");
-      }
-    });
-  });
+  //     // Jika bagian tertentu dalam tampilan, beri warna pada elemen sidebar yang sesuai
+  //     const sAyatElements = document.querySelectorAll(".sAyat");
+  //     if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+  //       // Setel warna latar belakang untuk elemen sidebar yang sesuai
+  //       sAyatElements[i].scrollIntoView(
+  //         (behavior = "smooth"),
+  //         (block = "center")
+  //       );
+  //       sAyatElements[i].classList.add("active");
+  //     } else {
+  //       // Hapus warna latar belakang jika tidak sesuai
+  //       sAyatElements[i].classList.remove("active");
+  //     }
+  //   });
+  // });
 
   searchSidebarNomor(ayat, ul);
 }
