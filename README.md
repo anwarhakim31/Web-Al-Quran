@@ -42,6 +42,6 @@ website ini merefrensikan tampilan dari:
 
 4. Sidebar untuk Menampilkan Pencarian Surah dan Nomor Surah 
  
-5. Bookmark localstorage(Masih Dalam Pengembangan) 📌
+5. Bookmark pada setiap ayat (localStorage)
 
 
