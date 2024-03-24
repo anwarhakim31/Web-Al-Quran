@@ -150,7 +150,8 @@ function playbodybtn(srcArray) {
       const liIndex = li.getAttribute("li-index");
       currentAudioIndex = liIndex;
       audioplayer.setAttribute("src", srcArray[currentAudioIndex]);
-
+      bnav.style.opacity = "0";
+      header.style.opacity = "0";
       playmusic();
 
       li.classList.add("bgcolor");
@@ -254,7 +255,10 @@ function viewSroll() {
       );
       if (currentLi) {
         currentLi.classList.add("bgcolor");
-        currentLi.scrollIntoView({ behavior: "smooth", block: "center" });
+        currentLi.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
       }
     }
   });
@@ -321,6 +325,8 @@ const closeBtn = document.querySelector(".close-btn");
 
 closeBtn.addEventListener("click", function () {
   mediaplayer.classList.remove("show");
+  bnav.style.opacity = "1";
+  header.style.opacity = "1";
   pausemusic();
 });
 
@@ -438,10 +444,11 @@ window.addEventListener("click", function (e) {
   }
 });
 
+//==============================light dark======================//
+
 const body = document.querySelector("body");
 const toggle = document.querySelector(".toggle");
 const key = "lightdark";
-
 window.addEventListener("DOMContentLoaded", function () {
   const storedData = getLs(); // Ambil data dari localStorage
   if (storedData.length > 0 && storedData[0].enable) {
@@ -469,7 +476,7 @@ function yasin(allLi, vars) {
     if (no.getAttribute("li-index") == vars) {
       const kahfi = document.querySelector(`li[li-index="${vars - 1}"]`);
       if (kahfi) {
-        kahfi.scrollIntoView({ behavior: "smooth", block: "center" });
+        kahfi.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
   });
@@ -484,31 +491,36 @@ booktoggle.addEventListener("click", function () {
   bnav.style.zIndex = "0";
 });
 
-window.addEventListener("click", function (e) {
-  addToBookmark(e);
-  removeToBookmark(e);
-});
-
 window.addEventListener("DOMContentLoaded", function () {
   let book = getBookLS();
   const booklist = document.querySelector(".book-list");
+  const Li = document.querySelectorAll(".ayat");
+  console.log(Li);
   book.forEach((book) => {
     let isi = "";
     const nSurah = book.nSurah;
     const nomor = book.nomor;
     const arab = book.arab;
+    const newNomor = nomor.split(":");
+    const surah = newNomor[0];
+    const ayat = newNomor[1];
     isi += templateMark(nSurah, nomor, arab);
 
-    booklist.innerHTML = isi;
+    booklist.insertAdjacentHTML("beforeend", isi);
+
     const limark = document.querySelector(".mark");
     if (limark) {
       booktoggle.style.display = "grid";
     } else {
       booktoggle.style.display = "none";
     }
+    // goToMark(surah, ayat, nomor);
   });
 });
-
+window.addEventListener("click", function (e) {
+  addToBookmark(e);
+  removeToBookmark(e);
+});
 function addToBookmark(e) {
   if (e.target.classList.contains("book")) {
     e.target.textContent = "bookmark_added";
@@ -526,25 +538,63 @@ function addToBookmark(e) {
     const arab = tagLI.querySelector(".arabic-text").textContent;
     const nSurah = halSurah.querySelector(".namalatin").textContent;
 
+    const newNo = nomor.split(":");
+    const surah = newNo[0];
+    const ayat = newNo[1];
     let list = "";
 
     list += templateMark(nSurah, nomor, arab);
 
     booklist.insertAdjacentHTML("beforeEnd", list);
-    addBookLS(nomor, nSurah, arab);
+
+    addBookLS(nomor, nSurah, arab, surah, ayat);
 
     const Limark = document.querySelector(".mark");
+
     showbookmark(Limark);
   }
 }
+window.addEventListener("click", function (e) {
+  if (e.target.classList.contains("noMark")) {
+    const nomor = e.target.parentElement.parentElement.dataset.id;
+    console.log(nomor);
+    const newNomor = nomor.split(":");
+    const surah = newNomor[0];
+    const ayat = newNomor[1];
+    window.location.href = `surat.html?/${surah}/${ayat}`;
+
+    removeToBookmark(e);
+    removeBookLs(nomor);
+  } else if (e.target.classList.contains("goto")) {
+    const nomor = e.target.parentElement.dataset.id;
+    const newNomor = nomor.split(":");
+    const surah = newNomor[0];
+    const ayat = newNomor[1];
+    window.location.href = `surat.html?/${surah}/${ayat}`;
+
+    removeToBookmark(e);
+    removeBookLs(nomor);
+  }
+});
+
+// function goToMark(e) {
+//   const nomor = e.getAttribute("data-id");
+//   const newNomor = nomor.split(":");
+//   const surah = newNomor[0];
+//   const ayat = newNomor[1];
+
+//   window.location.href = `surat.html?/${surah}/${ayat}`;
+//   removeToBookmark(e);
+//   removeBookLs(nomor);
+// }
 
 function templateMark(nSurah, nomor, arab) {
-  return `<li class="mark">
-                      <h6 class="book-surah">${nSurah}
-                        <p class="noMark">${nomor}</p>
+  return `<li class="mark goto"  data-id="${nomor}">
+                      <h6 class="book-surah goto">${nSurah}
+                        <p class="noMark goto">${nomor}</p> 
                       </h6>
 
-                      <span class="book-arab"
+                      <span class="book-arab goto"
                         >${arab}</span
                       >
                       <span class="material-symbols-outlined remove">
@@ -555,10 +605,11 @@ function templateMark(nSurah, nomor, arab) {
 
 function removeToBookmark(e) {
   if (e.target.classList.contains("remove")) {
-    e.target.parentElement.remove();
     const Limark = document.querySelectorAll(".mark");
     const temukanData = {};
-
+    const no = e.target.parentElement.dataset.id;
+    removeBookLs(no);
+    e.target.parentElement.remove();
     Limark.forEach((mark) => {
       const no = mark.querySelector(".noMark").textContent;
 
@@ -585,14 +636,25 @@ function showbookmark(Limark) {
   }
 }
 
-function addBookLS(nomor, nSurah, arab) {
-  const obj = { nomor, nSurah, arab };
+function addBookLS(nomor, nSurah, arab, surah, ayat) {
+  const obj = { nomor, nSurah, arab, surah, ayat };
 
   let book = getBookLS();
 
   book.push(obj);
 
   localStorage.setItem("mark", JSON.stringify(book));
+}
+
+function removeBookLs(no) {
+  let book = getBookLS();
+
+  book = book.filter((books) => books.nomor !== no);
+
+  localStorage.setItem("mark", JSON.stringify(book));
+  if (book.length == 0) {
+    localStorage.removeItem("mark");
+  }
 }
 
 function getBookLS() {

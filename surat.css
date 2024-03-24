@@ -24,7 +24,15 @@ body.active {
       background-color: #176b87;
     }
   }
-
+  .loader {
+    background-color: #1d2432;
+  }
+  .bookmark::before {
+    background-color: #1d2432;
+  }
+  .book-list {
+    background-color: #1d2432;
+  }
   .detail {
     color: white;
     span {
@@ -153,6 +161,29 @@ header.active {
 .bnav .updown {
   cursor: pointer;
   user-select: none;
+  position: relative;
+}
+
+.updown::after {
+  content: "Sidebar";
+  position: absolute;
+  font-size: 10px;
+  top: 0;
+  right: -100px;
+  color: white;
+  padding: 0.5rem;
+  background-color: #555;
+  border-radius: 5px;
+  animation: fadeIn 3s forwards; /* Terapkan animasi CSS */
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 .bnav form {
@@ -226,6 +257,9 @@ header.active {
 .extra .booktoggle {
   display: none;
   user-select: none;
+  span {
+    display: block;
+  }
 }
 
 .bookmark {
@@ -264,6 +298,8 @@ header.active {
   padding-inline: 1px;
   overflow: hidden;
   position: relative;
+  cursor: pointer;
+  user-select: none;
   .book-surah {
     font-size: 1rem;
     display: flex;
@@ -321,6 +357,7 @@ header.active {
   transition: transform 0.5s;
   color: #555;
 }
+
 .input-search {
   width: 100%;
   padding: 10px;

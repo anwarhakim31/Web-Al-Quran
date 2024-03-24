@@ -152,3 +152,182 @@ function lightdark(enable) {
 function getLS() {
   return localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : [];
 }
+const booktoggle = document.querySelector(".booktoggle");
+const bookmark = document.querySelector(".bookmark");
+const booklist = document.querySelector(".book-list");
+
+booktoggle.addEventListener("click", function () {
+  bookmark.classList.toggle("show");
+});
+
+window.addEventListener("DOMContentLoaded", function () {
+  let book = getBookLS();
+  const booklist = document.querySelector(".book-list");
+  const Li = document.querySelectorAll(".ayat");
+  console.log(Li);
+  book.forEach((book) => {
+    let isi = "";
+    const nSurah = book.nSurah;
+    const nomor = book.nomor;
+    const arab = book.arab;
+    const newNomor = nomor.split(":");
+    const surah = newNomor[0];
+    const ayat = newNomor[1];
+    isi += templateMark(nSurah, nomor, arab);
+
+    booklist.insertAdjacentHTML("beforeend", isi);
+
+    const limark = document.querySelector(".mark");
+    if (limark) {
+      booktoggle.style.display = "grid";
+    } else {
+      booktoggle.style.display = "none";
+    }
+    // goToMark(surah, ayat, nomor);
+  });
+});
+window.addEventListener("click", function (e) {
+  addToBookmark(e);
+  removeToBookmark(e);
+});
+function addToBookmark(e) {
+  if (e.target.classList.contains("book")) {
+    e.target.textContent = "bookmark_added";
+    e.target.style.color = "#176b87";
+
+    setInterval(() => {
+      e.target.textContent = "bookmark_add";
+      e.target.style.color = "#555";
+    }, 700);
+
+    const tagLI = e.target.parentElement.parentElement;
+    const tagP = e.target.parentElement.firstElementChild;
+    const halSurah = tagLI.parentElement.parentElement;
+    const nomor = tagP.textContent;
+    const arab = tagLI.querySelector(".arabic-text").textContent;
+    const nSurah = halSurah.querySelector(".namalatin").textContent;
+
+    const newNo = nomor.split(":");
+    const surah = newNo[0];
+    const ayat = newNo[1];
+    let list = "";
+
+    list += templateMark(nSurah, nomor, arab);
+
+    booklist.insertAdjacentHTML("beforeEnd", list);
+
+    addBookLS(nomor, nSurah, arab, surah, ayat);
+
+    const Limark = document.querySelector(".mark");
+
+    showbookmark(Limark);
+  }
+}
+window.addEventListener("click", function (e) {
+  if (e.target.classList.contains("noMark")) {
+    const nomor = e.target.parentElement.parentElement.dataset.id;
+    console.log(nomor);
+    const newNomor = nomor.split(":");
+    const surah = newNomor[0];
+    const ayat = newNomor[1];
+    window.location.href = `surat.html?/${surah}/${ayat}`;
+
+    removeToBookmark(e);
+    removeBookLs(nomor);
+  } else if (e.target.classList.contains("goto")) {
+    const nomor = e.target.parentElement.dataset.id;
+    const newNomor = nomor.split(":");
+    const surah = newNomor[0];
+    const ayat = newNomor[1];
+    window.location.href = `surat.html?/${surah}/${ayat}`;
+
+    removeToBookmark(e);
+    removeBookLs(nomor);
+  }
+});
+
+// function goToMark(e) {
+//   const nomor = e.getAttribute("data-id");
+//   const newNomor = nomor.split(":");
+//   const surah = newNomor[0];
+//   const ayat = newNomor[1];
+
+//   window.location.href = `surat.html?/${surah}/${ayat}`;
+//   removeToBookmark(e);
+//   removeBookLs(nomor);
+// }
+
+function templateMark(nSurah, nomor, arab) {
+  return `<li class="mark goto"  data-id="${nomor}">
+                      <h6 class="book-surah goto">${nSurah}
+                        <p class="noMark goto">${nomor}</p> 
+                      </h6>
+
+                      <span class="book-arab goto"
+                        >${arab}</span
+                      >
+                      <span class="material-symbols-outlined remove">
+                        bookmark_remove
+                        </span>
+                    </li>`;
+}
+
+function removeToBookmark(e) {
+  if (e.target.classList.contains("remove")) {
+    const Limark = document.querySelectorAll(".mark");
+    const temukanData = {};
+    const no = e.target.parentElement.dataset.id;
+    removeBookLs(no);
+    e.target.parentElement.remove();
+    Limark.forEach((mark) => {
+      const no = mark.querySelector(".noMark").textContent;
+
+      if (!temukanData[no]) {
+        temukanData[no] = mark;
+      } else {
+        temukanData[no].remove();
+        mark.remove();
+      }
+    });
+  }
+
+  if (booklist.innerHTML == "") {
+    booktoggle.style.display = "none";
+    bookmark.classList.remove("show");
+  }
+}
+
+function showbookmark(Limark) {
+  if (Limark) {
+    booktoggle.style.display = "grid";
+  } else {
+    booktoggle.style.display = "none";
+  }
+}
+
+function addBookLS(nomor, nSurah, arab, surah, ayat) {
+  const obj = { nomor, nSurah, arab, surah, ayat };
+
+  let book = getBookLS();
+
+  book.push(obj);
+
+  localStorage.setItem("mark", JSON.stringify(book));
+}
+
+function removeBookLs(no) {
+  let book = getBookLS();
+
+  book = book.filter((books) => books.nomor !== no);
+
+  localStorage.setItem("mark", JSON.stringify(book));
+  if (book.length == 0) {
+    localStorage.removeItem("mark");
+  }
+}
+
+function getBookLS() {
+  return localStorage.getItem("mark")
+    ? JSON.parse(localStorage.getItem("mark"))
+    : [];
+}
