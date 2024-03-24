@@ -942,7 +942,11 @@ button:nth-child(2):hover {
   html {
     font-size: 95%;
   }
-
+  .sSurat a {
+    color: #000;
+    text-decoration: none;
+    font-size: 0.75rem;
+  }
   .arabic-text {
     font-size: 1.5rem;
   }
@@ -969,14 +973,13 @@ button:nth-child(2):hover {
     font-size: 2rem;
     margin: 0 20px;
   }
-  .sSurat a {
-    color: #000;
-  }
 }
 
 @media (max-width: 567px) {
   .sSurat a {
     color: #000;
+    text-decoration: none;
+    font-size: 0.75rem;
   }
   .container.shift {
     padding-left: 0;
