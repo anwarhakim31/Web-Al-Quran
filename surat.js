@@ -27,6 +27,13 @@ const request1 = fetch(url1 + variableValue).then((response) => {
   }
   return response.json();
 });
+const request2 = fetch(url2 + variableValue).then((response) => {
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+
+  return response.json();
+});
 const request3 = fetch(url3).then((response) => {
   if (!response.ok) {
     throw new Error(response.statusText);
@@ -39,10 +46,10 @@ const prevbtn = document.querySelector(".prev-btn");
 const toTop = document.querySelector(".ToTop-btn");
 const detailpage = document.querySelector(".detail");
 
-Promise.all([request1, request3])
-  .then(([data1, data3]) => {
+Promise.all([request1, request2, request3])
+  .then(([data1, data2, data3]) => {
     document.querySelector(".name").textContent = data1.data.namaLatin;
-
+    document.querySelector(".arabicname").textContent = data2.data.name;
     document.querySelector(".part").textContent = data1.data.tempatTurun;
     document.querySelector(".total").textContent = data1.data.jumlahAyat;
     document.querySelector(".namalatin").textContent = data1.data.namaLatin;
