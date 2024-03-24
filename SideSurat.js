@@ -148,7 +148,7 @@ searchSurat.addEventListener("keydown", function (e) {
 
 function lengthSurat(ayat) {
   const ul = document.querySelector(".list-ayat");
-  console.log();
+
   let nomor = "";
   ayat.forEach((ayat, i) => {
     nomor += `  <li class="sAyat">

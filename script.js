@@ -163,8 +163,7 @@ booktoggle.addEventListener("click", function () {
 window.addEventListener("DOMContentLoaded", function () {
   let book = getBookLS();
   const booklist = document.querySelector(".book-list");
-  const Li = document.querySelectorAll(".ayat");
-  console.log(Li);
+
   book.forEach((book) => {
     let isi = "";
     const nSurah = book.nSurah;
@@ -226,7 +225,7 @@ function addToBookmark(e) {
 window.addEventListener("click", function (e) {
   if (e.target.classList.contains("noMark")) {
     const nomor = e.target.parentElement.parentElement.dataset.id;
-    console.log(nomor);
+
     const newNomor = nomor.split(":");
     const surah = newNomor[0];
     const ayat = newNomor[1];
