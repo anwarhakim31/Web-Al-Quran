@@ -969,9 +969,18 @@ button:nth-child(2):hover {
     font-size: 2rem;
     margin: 0 20px;
   }
+  .sSurat a {
+    color: #000;
+  }
 }
 
 @media (max-width: 567px) {
+  .sSurat a {
+    color: #000;
+  }
+  .container.shift {
+    padding-left: 0;
+  }
   .duration {
     margin-right: 40px;
 
