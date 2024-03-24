@@ -27,7 +27,9 @@ const request1 = fetch(url1 + variableValue).then((response) => {
   }
   return response.json();
 });
-const request2 = fetch(url2 + variableValue).then((response) => {
+const request2 = fetch(url2 + variableValue, {
+  method: "GET",
+}).then((response) => {
   if (!response.ok) {
     throw new Error(response.statusText);
   }
