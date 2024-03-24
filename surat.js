@@ -18,7 +18,7 @@ let vars = parts[2];
 currentAudioIndex = 0;
 
 const url1 = `https://equran.id/api/v2/surat/`;
-const url2 = `http://api.alquran.cloud/v1/surah/`;
+const url2 = `https://api.alquran.cloud/v1/surah/`;
 const url3 = `https://equran.id/api/v2/surat`;
 
 const request1 = fetch(url1 + variableValue).then((response) => {
