@@ -973,6 +973,108 @@ button:nth-child(2):hover {
     font-size: 2rem;
     margin: 0 20px;
   }
+  body.active {
+    background-color: #1d2432;
+    color: white;
+    header {
+      background-color: #176b87;
+    }
+    .control {
+      background-color: #1d2432;
+      .play-pause {
+        background-color: #176b87;
+      }
+    }
+    .loader {
+      background-color: #1d2432;
+    }
+    .bookmark::before {
+      background-color: #1d2432;
+    }
+    .book-list {
+      background-color: #1d2432;
+    }
+    .detail {
+      color: white;
+      span {
+        color: white;
+      }
+      .arabicname {
+        color: white;
+      }
+      .namalatin {
+        color: white;
+      }
+      .total::before {
+        background-color: white;
+      }
+    }
+    .box {
+      background-color: #111827;
+      img {
+        z-index: 0;
+      }
+    }
+    svg path {
+      fill: white;
+    }
+    .bnav {
+      background-color: #176b87;
+      box-shadow: 0 5px 5px #111827;
+    }
+    .body-surat li:first-child {
+      border-top: 2px solid #176b87;
+    }
+    .ayat {
+      border-top: 0px solid black;
+      border: 1px solid #176b87;
+      background-color: #111827;
+    }
+    .ayat span {
+      color: white;
+    }
+    .ayat .symbol {
+      color: #176b87;
+    }
+    button {
+      background-color: #111827;
+      border-color: #176b87;
+      color: white;
+      a {
+        border-color: #176b87;
+        color: white;
+        span {
+          color: white;
+        }
+      }
+    }
+    .sidebar {
+      background-color: #176b87;
+      p {
+        color: white;
+      }
+      .sSurat.active {
+        background-color: #176b87;
+      }
+      .sAyat.active {
+        background-color: #176b87;
+      }
+    }
+    .list-surat::-webkit-scrollbar-thumb {
+      background-color: white;
+    }
+    .list-surat::-webkit-scrollbar-track {
+      background-color: #111827;
+      border-radius: 10px;
+    }
+    .list-ayat::-webkit-scrollbar-thumb {
+      background-color: white;
+    }
+    .list-ayat::-webkit-scrollbar-track {
+      background-color: #111827;
+      border-radius: 10px;
+    }
+  }
 }
 
 @media (max-width: 567px) {
@@ -1000,6 +1102,12 @@ button:nth-child(2):hover {
     width: 10px;
     height: 10px;
     font-size: 1rem;
+  }
+  .control-btn span {
+    font-size: 2rem;
+    cursor: pointer;
+    margin-inline: 5px;
+    padding: 2px;
   }
 
   .control-btn span {
@@ -1075,6 +1183,108 @@ button:nth-child(2):hover {
   .latin-text,
   .arti-text {
     font-size: 0.85rem;
+  }
+  body.active {
+    background-color: #1d2432;
+    color: white;
+    header {
+      background-color: #176b87;
+    }
+    .control {
+      background-color: #1d2432;
+      .play-pause {
+        background-color: #176b87;
+      }
+    }
+    .loader {
+      background-color: #1d2432;
+    }
+    .bookmark::before {
+      background-color: #1d2432;
+    }
+    .book-list {
+      background-color: #1d2432;
+    }
+    .detail {
+      color: white;
+      span {
+        color: white;
+      }
+      .arabicname {
+        color: white;
+      }
+      .namalatin {
+        color: white;
+      }
+      .total::before {
+        background-color: white;
+      }
+    }
+    .box {
+      background-color: #111827;
+      img {
+        z-index: 0;
+      }
+    }
+    svg path {
+      fill: white;
+    }
+    .bnav {
+      background-color: #176b87;
+      box-shadow: 0 5px 5px #111827;
+    }
+    .body-surat li:first-child {
+      border-top: 2px solid #176b87;
+    }
+    .ayat {
+      border-top: 0px solid black;
+      border: 1px solid #176b87;
+      background-color: #111827;
+    }
+    .ayat span {
+      color: white;
+    }
+    .ayat .symbol {
+      color: #176b87;
+    }
+    button {
+      background-color: #111827;
+      border-color: #176b87;
+      color: white;
+      a {
+        border-color: #176b87;
+        color: white;
+        span {
+          color: white;
+        }
+      }
+    }
+    .sidebar {
+      background-color: #176b87;
+      p {
+        color: white;
+      }
+      .sSurat.active {
+        background-color: #176b87;
+      }
+      .sAyat.active {
+        background-color: #176b87;
+      }
+    }
+    .list-surat::-webkit-scrollbar-thumb {
+      background-color: white;
+    }
+    .list-surat::-webkit-scrollbar-track {
+      background-color: #111827;
+      border-radius: 10px;
+    }
+    .list-ayat::-webkit-scrollbar-thumb {
+      background-color: white;
+    }
+    .list-ayat::-webkit-scrollbar-track {
+      background-color: #111827;
+      border-radius: 10px;
+    }
   }
 }
 @keyframes sideanimate {
