@@ -750,15 +750,6 @@ header.active {
   border-radius: 5px;
 }
 
-button:nth-child(2) {
-  padding: 0.5rem;
-  border: 2px solid #dfdfdf;
-}
-
-button:nth-child(2):hover {
-  border: 2px solid #2ca4ab;
-}
-
 .bottom-pagination button a:hover {
   border: 2px solid #2ca4ab;
 }
@@ -1140,11 +1131,6 @@ button:nth-child(2):hover {
     font-size: 1rem;
   }
 
-  button:nth-child(2) {
-    padding: 1rem 1px;
-    border: 2px solid #dfdfdf;
-  }
-
   .arrow a {
     padding: 1rem 5px;
     display: flex;
@@ -1159,24 +1145,20 @@ button:nth-child(2):hover {
   }
 
   .sidebar .list-surat .sSurat {
-    font-size: 2rem;
+    font-size: 1rem;
 
     p {
-      font-size: 1rem;
       padding: 0.5rem 5px;
     }
   }
   .bottom-pagination button {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
 
     a {
-      padding: 0.2rem;
+      padding: 0.5rem 0.3rem;
     }
   }
 
-  .bottom-pagination button:nth-child(2) {
-    padding: 0.3rem;
-  }
   .arabic-text {
     font-size: 1.5rem;
   }
