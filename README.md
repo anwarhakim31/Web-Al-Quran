@@ -24,9 +24,12 @@ website ini merefrensikan tampilan dari:
 - https://quran.com/id
 - https://quran.nu.or.id/
 
+
 # Tech Stack 🛠️
 - ![HTML](https://img.shields.io/badge/-HTML-050f2c?style=flat&logo=HTML5)&nbsp;
-	@@ -32,16 +19,6 @@ website ini merefrensikan tampilan dari:
+- ![CSS](https://img.shields.io/badge/-CSS-050f2c?style=flat&logo=CSS3&logoColor=1572B6)&nbsp;
+- ![JavaScript](https://img.shields.io/badge/-JavaScript-050f2c?style=flat&logo=javascript)&nbsp;
+
 
 ## Fitur Website 🌟
 
